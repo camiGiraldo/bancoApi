@@ -63,12 +63,6 @@ class AccountController extends Controller
         return response()->json(['data'=>$cuenta],200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Account  $account
-     * @return \Illuminate\Http\Response
-  
 
     /**
      * Update the specified resource in storage.
@@ -77,9 +71,23 @@ class AccountController extends Controller
      * @param  \App\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Account $account)
+    public function update(Request $request, $id)
     {
-        //
+        $cuenta = Account::findOrFail($id);
+        
+       
+        
+        if($request->has('ac_password')){
+            $cuenta->ac_password = $request->ac_password ;
+        }
+        
+        if($request->has('ac_state')){
+            $cuenta->ac_state = $request->ac_state ;
+        }
+                
+        $cuenta->save();
+        
+        return response()->json(['data'=>$cuenta],200);
     }
 
     /**
