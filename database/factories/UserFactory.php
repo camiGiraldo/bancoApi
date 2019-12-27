@@ -22,7 +22,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'num_documento'=>$faker->numberBetween(0,10),
         'apellido'=>$faker->word,
         'direccion'=>$faker->word,
-        'is_cajero'=>$faker->randomElement([User::IS_CAJERO, User::IS_USUARIO]),
+        'rol'=>$faker->randomElement([User::IS_CAJERO, User::IS_USUARIO]),
         'remember_token' => str_random(10),
     ];
 });

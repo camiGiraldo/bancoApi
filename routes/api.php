@@ -16,7 +16,10 @@ use Illuminate\Http\Request;
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('details', 'UserController@details');
+    
+    Route::resource('users', 'UserController', [
+        'only' => ['index', 'show', 'update']
+    ]);
     Route::get('logout', 'UserController@logout');
     Route::resource('accounts','AccountController');
     Route::resource('transactions','TransactionController');

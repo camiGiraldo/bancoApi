@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use Illuminate\Http\Request;
+use Validator;
 
 class AccountController extends Controller
 {
@@ -15,18 +16,10 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return response()->json($this->successStatus);
+        $cuentas = Account::all();
+        return response()->json(['data'=>$cuentas],200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     
-    public function create()
-    {
-        //
-    }*/
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +29,26 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set("America/Bogota");
+        $fechaHoy = date('d-m-Y h:i:s A');
+        $numberAccount = strtotime($fechaHoy);
+        
+        
+        $validator = Validator::make($request->all(), [
+                    'ac_password' => 'required',
+                    'user_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+        
+        $input = $request->all();
+        $input['ac_balance']=0;
+        $input['ac_number']=$numberAccount;
+        
+        $account = Account::create($input);
+        
+        return response()->json(['success' => $account], $this->successStatus);
     }
 
     /**
@@ -45,9 +57,10 @@ class AccountController extends Controller
      * @param  \App\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function show(Account $account)
+    public function show($id)
     {
-        //
+        $cuenta = Account::find($id);
+        return response()->json(['data'=>$cuenta],200);
     }
 
     /**
@@ -55,11 +68,7 @@ class AccountController extends Controller
      *
      * @param  \App\Account  $account
      * @return \Illuminate\Http\Response
-     
-    public function edit(Account $account)
-    {
-        //
-    }*/
+  
 
     /**
      * Update the specified resource in storage.

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('num_documento')->unsigned();
             $table->string('apellido');
             $table->string('direccion');
-            $table->string('is_cajero')->default(User::IS_USUARIO);
+            $table->string('rol')->default(User::IS_USUARIO);
             $table->rememberToken();
             $table->timestamps();
         });

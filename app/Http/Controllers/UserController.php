@@ -26,6 +26,41 @@ class UserController extends Controller {
             return response()->json(['error' => 'Unauthorised'], 401);
         }
     }
+    
+    public function index() {
+        $usuarios = User::all();
+        return response()->json(['data'=>$usuarios],200);
+    }
+    
+    public function show($id) {
+        $usuario = User::find($id);
+        return response()->json(['data'=>$usuario],200);
+    }
+    public function update(Request $request ,$id) {
+        $usuario = User::findOrFail($id);
+        
+       
+        
+        if($request->has('name')){
+            $usuario->name = $request->name ;
+        }
+        if($request->has('email')){
+            $usuario->email = $request->email ;
+        }
+        if($request->has('password')){
+            $usuario->password = bcrypt($request->password);
+        }
+        if($request->has('tipo_doc')){
+            $usuario->tipo_doc = $request->tipo_doc ;
+        }
+        if($request->has('num_documento')){
+            $usuario->num_documento = $request->num_documento ;
+        }
+        
+        $usuario->save();
+        
+        return response()->json(['data'=>$usuario],200);
+    }
 
     /**
      * Register api 

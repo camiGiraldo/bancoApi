@@ -18,8 +18,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    const IS_CAJERO = 'true';
-    const IS_USUARIO = 'false';  
+    const IS_CAJERO = 'Cajero';
+    const IS_USUARIO = 'Usuario';  
+    const IS_ASESOR = 'Asesor'; 
     
     protected $fillable = [
         'name', 
@@ -29,7 +30,7 @@ class User extends Authenticatable
         'num_documento',
         'apellido',
         'direccion',
-        'is_cajero',
+        'rol',
     ];
 
     /**
@@ -42,7 +43,7 @@ class User extends Authenticatable
     ];
     
     public function isCajero() {
-        return $this->is_cajero == User::IS_CAJERO;
+        return $this->rol == User::IS_CAJERO;
     }
     
     public function accounts() {
