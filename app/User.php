@@ -45,11 +45,13 @@ class User extends Authenticatable
         return $this->is_cajero == User::IS_CAJERO;
     }
     
+    public function accounts() {
+        return $this->hasMany(Account::class);
+    }
+    
     public function transactions(){
         return $this->hasMany(Transaction::class);
     }
     
-    public function accounts() {
-        return $this->hasMany(Account::class);
-    }
+    
 }

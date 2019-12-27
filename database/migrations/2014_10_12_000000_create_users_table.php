@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('tipo_doc');
+            $table->integer('num_documento')->unsigned();
+            $table->string('apellido');
+            $table->string('direccion');
+            $table->string('is_cajero')->default(User::IS_USUARIO);
             $table->rememberToken();
             $table->timestamps();
         });
