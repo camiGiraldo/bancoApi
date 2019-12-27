@@ -38,6 +38,9 @@ class UserController extends Controller {
                     'email' => 'required|email',
                     'password' => 'required',
                     'c_password' => 'required|same:password',
+                    'tipo_doc' => 'required',
+                    'num_documento' => 'required',
+                    'direccion' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
