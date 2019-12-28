@@ -21,7 +21,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::resource('users', 'UserController', [
         'only' => ['index', 'show', 'update']
     ]);
-    Route::get('logout', 'UserController@logout');
     Route::resource('accounts','AccountController');
-    Route::resource('transactions','TransactionController');
+    Route::resource('transactions','TransactionController');  
+    Route::get('logout', 'UserController@logout');
+    Route::post('accounts/getCuentas', 'AccountController@getAccountsByIdUser');
 });

@@ -21,6 +21,7 @@ class UserController extends Controller {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('MyApp')->accessToken;
+            $success['rol'] = $user->rol;
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
@@ -40,9 +41,14 @@ class UserController extends Controller {
         $usuario = User::findOrFail($id);
         
        
-        
         if($request->has('name')){
             $usuario->name = $request->name ;
+        }
+        if($request->has('apellido')){
+            $usuario->apellido = $request->apellido ;
+        }
+        if($request->has('direccion')){
+            $usuario->direccion = $request->direccion ;
         }
         if($request->has('email')){
             $usuario->email = $request->email ;

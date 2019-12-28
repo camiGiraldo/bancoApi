@@ -20,6 +20,10 @@ class AccountController extends Controller
         return response()->json(['data'=>$cuentas],200);
     }
 
+    public function getAccountsByIdUser(Request $request){
+        $cuentas= Account::select('*')->where('user_id','=',$request->user_id)->get();
+        return response()->json(['data'=>$cuentas],200);
+    }
 
     /**
      * Store a newly created resource in storage.
