@@ -25,4 +25,5 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::resource('transactions','TransactionController');  
     Route::get('logout', 'UserController@logout');
     Route::post('accounts/getCuentas', 'AccountController@getAccountsByIdUser');
+    Route::post('transactions/getCuentasUser', 'TransactionController@getCuentasUser');
 });
