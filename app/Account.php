@@ -3,7 +3,8 @@
 namespace App;
 
 use App\User;
-USE App\Transaction;
+use App\Transaction;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
